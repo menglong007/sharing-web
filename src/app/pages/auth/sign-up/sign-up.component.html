@@ -1,0 +1,42 @@
+<div class="h-full overflow-y-hidden bg-neutral-100 dark:bg-neutral-700">
+
+  <div class="flex gap-8 justify-between">
+    <div class="h-svh ">
+      <img src="assets/signin.png" class="w-full h-full rounded-br-full rounded-tr-[5000px]">
+    </div>
+
+    <div>
+      <div class="flex w-full justify-end p-2">
+        <button mat-dialog-close>
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+
+      <div class="flex flex-col space-y-4 justify-center items-center   p-10">
+        <p class="font-semibold text-3xl text-center">Sign Up</p>
+
+        <div class="flex gap-2">
+          <input placeholder="First Name" class="bg-neutral-200 p-4 rounded-full focus:outline-none focus:ring-0">
+          <input placeholder="Last Name" class="bg-neutral-200 p-4 rounded-full  focus:outline-none focus:ring-0">
+        </div>
+        <input placeholder="Email" class="bg-neutral-200 p-4 rounded-full w-[398.4px] focus:outline-none focus:ring-0">
+        <input type="password" placeholder="Password"
+               class="bg-neutral-200 p-4 rounded-full w-[398.4px] focus:outline-none focus:ring-0">
+        <input type="password" placeholder="Confirm Password"
+               class="bg-neutral-200 p-4 rounded-full w-[398.4px] focus:outline-none focus:ring-0">
+
+        <div class="w-full flex justify-between items-center">
+          <span class="flex items-center gap-2"><mat-icon color="primary">verified</mat-icon> I accept the Terms of Use & Privacy policy</span>
+          <button class="p-4 rounded-full bg-[#219891] hover:bg-[#1F8A84] text-white font-bold">Sign Up</button>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <mat-icon>subdirectory_arrow_right</mat-icon>
+          <button class="text-[#219891] font-medium" (click)="onChange()">Go to Log in</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

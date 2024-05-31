@@ -1,0 +1,99 @@
+<div class="flex flex-col space-y-20 dark:bg-neutral-800">
+<div class="h-full w-full flex flex-col space-y-7 "  >
+  <div class="flex mt-16 w-full">
+    <img src="assets/product.png" class="object-cover w-full h-40">
+    <div class="p-4 w-[500px] h-40 flex flex-col items-center justify-center bg-white">
+      <p class="text-3xl font-bold ">Top Websites ranking</p>
+      <span class="flex items-center justify-center font-medium text-gray-500 gap-2 text-lg">Most Visited Websites <mat-icon>computer</mat-icon> </span>
+    </div>
+  </div>
+  <div class="flex flex-col space-y-7 pl-60 pr-60">
+    <div class="flex space-x-10">
+      <div class="bg-neutral-200 p-2 rounded-full w-96 flex items-center gap-4 dark:bg-neutral-700 dark:text-white">
+        <mat-icon>drag_indicator</mat-icon>
+        <input placeholder="Search..." class="bg-neutral-200 w-full focus:outline-none focus:ring-0  dark:bg-neutral-700">
+        <button class="flex items-center" (menuOpened)="onMenuOpened()" (menuClosed)="onMenuClosed()"
+                [matMenuTriggerFor]="beforeMenu">
+          <mat-icon>{{ checked ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
+        </button>
+        <mat-menu #beforeMenu="matMenu" xPosition="before" class="w-96 menu">
+          <div class="p-8">
+            <ul class="space-y-2">
+              <li>Cryptography</li>
+              <li>Business</li>
+              <li>Science</li>
+              <li>Code</li>
+              <li>Math</li>
+              <li>History</li>
+              <li>Music</li>
+              <li>Downloader</li>
+            </ul>
+          </div>
+        </mat-menu>
+      </div>
+
+      <button class="p-2 rounded-full bg-[#219891] hover:bg-[#1F8A84] text-black font-bold  w-16">Go</button>
+
+    </div>
+
+    <div class="flex space-x-20 ">
+      <div>
+
+        <div>
+          <p class="text-2xl dark:text-white font-semibold border-b">Introduction</p>
+          <p class="dark:text-white">Meet the brilliant minds who have seamlessly woven their expertise into the fabric of "Sharing Website ". At the
+            helm is An Hokmeng, our Project Manager extraordinaire, orchestrating every detail with finesse. Leng Henglong &
+            Art Menglong heads our front-end and back-end development, translating ideas into functional elements that bring
+            the website to life. Hong Seanghai and Heng David, the artistic virtuoso behind our UI/UX design, has sculpted an
+            interface that marries aesthetics with intuitive navigation. Together, this team embodies the spirit of
+            collaboration, each role harmonizing with the others to create a digital masterpiece that resonates with all who
+            visit.</p>
+
+        </div>
+
+        <div>
+          <p class="text-2xl dark:text-white font-semibold border-b">Detail</p>
+          <p class="dark:text-white">Meet the brilliant minds who have seamlessly woven their expertise into the fabric of "Sharing Website ". At the
+            helm is An Hokmeng, our Project Manager extraordinaire, orchestrating every detail with finesse. Leng Henglong &
+            Art Menglong heads our front-end and back-end development, translating ideas into functional elements that bring
+            the website to life. Hong Seanghai and Heng David, the artistic virtuoso behind our UI/UX design, has sculpted an
+            interface that marries aesthetics with intuitive navigation. Together, this team embodies the spirit of
+            collaboration, each role harmonizing with the others to create a digital masterpiece that resonates with all who
+            visit.</p>
+
+        </div>
+
+        <div>
+          <p class="text-2xl dark:text-white font-semibold border-b">How many user?</p>
+          <ul class="space-y-2 pl-4 dark:text-white" style="list-style-type:disc">
+            <li>Programming</li>
+            <li>Business</li>
+            <li>Math</li>
+          </ul>
+
+        </div>
+
+      </div>
+      <div class="dark:text-white w-[1000px] flex flex-col justify-center  items-center space-y-2">
+        <p class="bg-neutral-300 pl-4 pr-4 rounded-2xl w-fit ">Picture</p>
+          <img src="assets/logo.png" class="w-40 h-40 rounded-2xl">
+        <div class="gap-2 flex items-start">
+          <span class="font-semibold ">Founder:</span>
+          <a><u>Mark Zuckerberg, Eduardo Saverin, Andrew McCollum, Dustin Moskovitz, Chris Hughes</u></a>
+        </div>
+        <div class="flex gap-2">
+          <p class="font-semibold">CEO:</p>
+          <a><u>Mark Zuckerberg</u></a>
+        </div>
+
+        <div class="flex  gap-2">
+          <p class="font-semibold ">Revenue:</p>
+          <p>116.6 billion USD (2022)</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
+</div>
