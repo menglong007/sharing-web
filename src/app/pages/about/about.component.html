@@ -1,4 +1,4 @@
-<div class="flex w-full h-screen items-center justify-center gap-20 pl-40 pr-40 dark:bg-neutral-800">
+<div class="flex w-full h-screen items-center justify-center gap-20 pl-40 pr-40 dark:bg-neutral-800 ">
   <div class="w-fit">
     <div class="mb-16">
       <p class="text-3xl font-semibold dark:text-white">Hi guys, We’re from team sharing Website.</p>
@@ -15,3 +15,6 @@
     <img src="assets/logo.png" class="border-black border w-[500px]">
   </div>
 </div>
+<ngx-loading
+  [show]="loading"
+  [config]="{ backdropBorderRadius: '3px'}"></ngx-loading>

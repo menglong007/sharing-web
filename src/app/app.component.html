@@ -1,4 +1,6 @@
-<div [ngClass]="{ dark: themeService.isDark }">
-  <app-navigate-bar class="absolute w-full"></app-navigate-bar>
-  <router-outlet class="relative"></router-outlet>
+<div [ngClass]="{ dark: themeService.isDark }" >
+  <div>
+    <app-navigate-bar class="fixed top-0 left-0 w-full "></app-navigate-bar>
+    <router-outlet class="relative"></router-outlet>
+  </div>
 </div>

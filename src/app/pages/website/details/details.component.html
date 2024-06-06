@@ -37,7 +37,7 @@
     </div>
 
     <div class="flex space-x-20 ">
-      <div>
+      <div class="flex flex-col space-y-10">
 
         <div>
           <p class="text-2xl dark:text-white font-semibold border-b">Introduction</p>
@@ -81,12 +81,12 @@
           <span class="font-semibold ">Founder:</span>
           <a><u>Mark Zuckerberg, Eduardo Saverin, Andrew McCollum, Dustin Moskovitz, Chris Hughes</u></a>
         </div>
-        <div class="flex gap-2">
+        <div class="flex gap-2 justify-start w-full">
           <p class="font-semibold">CEO:</p>
           <a><u>Mark Zuckerberg</u></a>
         </div>
 
-        <div class="flex  gap-2">
+        <div class="flex gap-2 justify-start w-full">
           <p class="font-semibold ">Revenue:</p>
           <p>116.6 billion USD (2022)</p>
         </div>
@@ -97,3 +97,8 @@
 </div>
 <app-footer></app-footer>
 </div>
+
+<ngx-loading
+  [show]="loading"
+  [config]="{ backdropBorderRadius: '3px'}"></ngx-loading>
+

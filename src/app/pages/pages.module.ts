@@ -8,6 +8,10 @@ const routes: Routes = [{
   component: PagesComponent,
   children: [
     {
+      path: 'home',
+      loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
+    },
+    {
       path: 'website',
       loadChildren: () => import('./website/website.module').then((m) => m.WebsiteModule),
     },
@@ -21,7 +25,7 @@ const routes: Routes = [{
     },
     {
       path: '',
-      redirectTo: 'website',
+      redirectTo: 'home',
       pathMatch: 'full',
     }]
 }]
