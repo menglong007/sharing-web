@@ -9,7 +9,8 @@ import {FooterComponent} from "../shared/footer/footer.component";
   imports: [
     RouterLink,
     MatIcon,
-    FooterComponent
+    FooterComponent,
+
   ],
   templateUrl: './home.component.html',
 
