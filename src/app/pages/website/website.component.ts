@@ -1,14 +1,18 @@
-import { Component } from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {NavigateBarComponent} from "../shared/navigate-bar/navigate-bar.component";
 import {MatIcon} from "@angular/material/icon";
 import {
-  MatCell, MatCellDef,
+  MatCell,
+  MatCellDef,
   MatColumnDef,
   MatHeaderCell,
   MatHeaderCellDef,
-  MatHeaderRow, MatHeaderRowDef,
-  MatRow, MatRowDef,
-  MatTable, MatTableDataSource
+  MatHeaderRow,
+  MatHeaderRowDef,
+  MatRow,
+  MatRowDef,
+  MatTable,
+  MatTableDataSource
 } from "@angular/material/table";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {
@@ -21,35 +25,26 @@ import {RouterLink} from "@angular/router";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {NgxLoadingModule} from "ngx-loading";
 import {NgIf} from "@angular/common";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {NavMenuComponent} from "../shared/navigate-bar/nav-menu/nav-menu.component";
 
 export interface PeriodicElement {
   link: string;
-  logo: number;
+  logo: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  { link: 'Hydrogen', logo: 1.0079},
-  { link: 'Hydrogen', logo: 1.0079},
-  { link: 'Hydrogen', logo: 1.0079},
-  { link: 'Hydrogen', logo: 1.0079},
-  { link: 'Hydrogen', logo: 1.0079},
-  { link: 'Hydrogen', logo: 1.0079},
-  { link: 'Hydrogen', logo: 1.0079},
-  { link: 'Hydrogen', logo: 1.0079},
-  { link: 'Hydrogen', logo: 1.0079},
-  { link: 'Hydrogen', logo: 1.0079},
-  { link: 'Hydrogen', logo: 1.0079},
-  { link: 'Hydrogen', logo: 1.0079},
-  { link: 'Hydrogen', logo: 1.0079},
-  { link: 'Hydrogen', logo: 1.0079},
-  { link: 'Hydrogen', logo: 1.0079},
-  { link: 'Hydrogen', logo: 1.0079},
-  { link: 'Hydrogen', logo: 1.0079},
-  { link: 'Hydrogen', logo: 1.0079},
-  { link: 'Hydrogen', logo: 1.0079},
-  { link: 'Hydrogen', logo: 1.0079},
-
+  {link: 'Hydrogen', logo: 'H'},
+  {link: 'Helium', logo: 'He'},
+  {link: 'Lithium', logo: 'Li'},
+  {link: 'Beryllium', logo: 'Be'},
+  {link: 'Boron', logo: 'B'},
+  {link: 'Carbon', logo: 'C'},
+  {link: 'Nitrogen', logo: 'N'},
+  {link: 'music', logo: 'O'},
+  {link: 'Cryptography', logo: 'F'},
+  {link: 'Neon', logo: 'Ne'},
 ];
 
 
@@ -82,17 +77,20 @@ const ELEMENT_DATA: PeriodicElement[] = [
     NgIf,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    NavMenuComponent
   ],
   templateUrl: './website.component.html',
 })
-export class WebsiteComponent {
+export class WebsiteComponent implements OnInit {
 
-  input=new FormControl<string|null>(null);
+  input = new FormControl<string | null>(null);
+
 
   public loading = false;
 
   displayedColumns: string[] = ['no', 'link', 'logo'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  dataSource = new MatTableDataSource([]);
 
 
   checked: boolean = false;
@@ -105,27 +103,40 @@ export class WebsiteComponent {
     this.checked = false;
   }
 
-  constructor() {
-    this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
-      return data.link.toLowerCase().includes(filter);
-    };
+  constructor(private http: HttpClient) {
+    // this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
+    //   return data.link.toLowerCase().includes(filter);
+    // };
 
   }
 
-  onSubmit(){
+  onSubmit() {
     this.loading = true;
     setTimeout(() => {
       this.loading = false;
     }, 300);
     const body = this.input.getRawValue();
     this.dataSource.filter = body!.trim().toLowerCase();
-
   }
 
-  keyDownFunction(event : any ) {
-    if ( event.keyCode === 13) {
+  keyDownFunction(event: any) {
+    if (event.keyCode === 13) {
       this.onSubmit();
     }
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  ngOnInit() {
+    this.loading = true;
+    this.http.get(`http://127.0.0.1:8000/api/record/links`).subscribe({
+      next: (data: any) => {
+        this.dataSource.data = data.message.data;
+        this.loading = false;
+      }
+    })
   }
 
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {MatIcon} from "@angular/material/icon";
 
 @Component({
@@ -10,5 +10,11 @@ import {MatIcon} from "@angular/material/icon";
   templateUrl: './nav-menu.component.html',
 })
 export class NavMenuComponent {
+
+  @Output() filterValueChange: EventEmitter<string> = new EventEmitter();
+
+  applyFilter(filterValue: string) {
+    this.filterValueChange.emit(filterValue);
+  }
 
 }

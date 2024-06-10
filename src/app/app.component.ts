@@ -16,7 +16,6 @@ import {LoadingService} from "./core/service/loading.service";
 export class AppComponent {
   title = 'sharing-web';
 
-
   constructor(public themeService: ThemeService) {
 
   }
