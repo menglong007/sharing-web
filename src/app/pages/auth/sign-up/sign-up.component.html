@@ -1,41 +1,103 @@
-<div class="h-full overflow-y-hidden bg-neutral-100 dark:bg-neutral-700">
+<div class="h-full bg-neutral-100 dark:bg-neutral-700">
 
   <div class="flex gap-8 justify-between">
-    <div class="h-svh ">
-      <img src="assets/signin.png" class="w-full h-full rounded-br-full rounded-tr-[5000px]">
+    <div class="h-full ">
+      <img src="assets/signin.png" class="w-full h-full max-xl:hidden">
     </div>
 
-    <div>
+    <div class="w-[40%] h-full max-sm:w-full">
       <div class="flex w-full justify-end p-2">
         <button mat-dialog-close>
           <mat-icon>close</mat-icon>
         </button>
       </div>
 
-      <div class="flex flex-col space-y-4 justify-center items-center   p-10">
+      <form [formGroup]="form" class="flex flex-col space-y-4 pr-10  justify-center items-center max-sm:8 ">
         <p class="font-semibold text-3xl text-center">Sign Up</p>
 
-        <div class="flex gap-2">
-          <input placeholder="First Name" class="bg-neutral-200 p-4 rounded-full focus:outline-none focus:ring-0">
-          <input placeholder="Last Name" class="bg-neutral-200 p-4 rounded-full  focus:outline-none focus:ring-0">
+        <div class="w-full">
+          <input placeholder="username" formControlName="username"
+                 class="w-full bg-neutral-200 p-4 rounded-full focus:outline-none focus:ring-0 ">
+          <ng-container *ngIf="form.get('username')?.touched && form.get('username')?.errors as errors">
+            <mat-error *ngIf="errors['required']" class="text-red-500 pl-4">Required Username</mat-error>
+            <mat-error *ngIf="errors['maxlength']">{{ errors['maxlength']['actualLength'] }}
+              /{{ errors['maxlength']['requiredLength'] }}
+            </mat-error>
+          </ng-container>
         </div>
-        <input placeholder="Email" class="bg-neutral-200 p-4 rounded-full w-[398.4px] focus:outline-none focus:ring-0">
-        <input type="password" placeholder="Password"
-               class="bg-neutral-200 p-4 rounded-full w-[398.4px] focus:outline-none focus:ring-0">
-        <input type="password" placeholder="Confirm Password"
-               class="bg-neutral-200 p-4 rounded-full w-[398.4px] focus:outline-none focus:ring-0">
 
-        <div class="w-full flex justify-between items-center">
-          <span class="flex items-center gap-2"><mat-icon color="primary">verified</mat-icon> I accept the Terms of Use & Privacy policy</span>
-          <button class="p-4 rounded-full bg-[#219891] hover:bg-[#1F8A84] text-white font-bold">Sign Up</button>
+        <div class="w-full">
+          <mat-select placeholder="gender" formControlName="gender"
+                      class="w-full bg-neutral-200 p-4 rounded-full focus:outline-none focus:ring-0">
+            <mat-option *ngFor="let item of Gender" [value]="item.id">{{ item.name }}</mat-option>
+          </mat-select>
+          <ng-container *ngIf="form.get('gender')?.touched && form.get('gender')?.errors as errors">
+            <mat-error *ngIf="errors['required']" class="text-red-500 pl-4">Required Gender</mat-error>
+            <mat-error *ngIf="errors['maxlength']">{{ errors['maxlength']['actualLength'] }}
+              /{{ errors['maxlength']['requiredLength'] }}
+            </mat-error>
+          </ng-container>
+        </div>
+
+        <div class="w-full">
+          <input placeholder="Email" formControlName="email"
+                 class="bg-neutral-200 p-4 rounded-full w-full focus:outline-none focus:ring-0">
+          <ng-container *ngIf="form.get('email')?.touched && form.get('email')?.errors as errors">
+            <mat-error *ngIf="errors['required']" class="text-red-500 pl-4">Required Email</mat-error>
+            <mat-error *ngIf="errors['maxlength']">{{ errors['maxlength']['actualLength'] }}
+              /{{ errors['maxlength']['requiredLength'] }}
+            </mat-error>
+          </ng-container>
+        </div>
+
+        <div class="w-full">
+          <div class="flex w-full bg-neutral-200 rounded-full">
+            <input [type]="password ? 'password' : 'text'" placeholder="Password" formControlName="password"
+                   class="bg-neutral-200 p-4 rounded-full w-full focus:outline-none focus:ring-0">
+            <button class="flex items-center p-4" (click)="passwordClick($event)">
+              <mat-icon>{{ password ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+          </div>
+          <ng-container *ngIf="form.get('password')?.touched && form.get('password')?.errors as errors">
+            <mat-error *ngIf="errors['required']" class="text-red-500 pl-4">Required Password</mat-error>
+            <mat-error *ngIf="errors['maxlength']">{{ errors['maxlength']['actualLength'] }}
+              /{{ errors['maxlength']['requiredLength'] }}
+            </mat-error>
+          </ng-container>
+        </div>
+
+        <div class="w-full">
+          <div class="flex w-full bg-neutral-200 rounded-full">
+            <input [type]="cfPassword ? 'password' : 'text'" placeholder="Confirm Password"
+                   formControlName="password_confirmation"
+                   class="bg-neutral-200 p-4 rounded-full w-full focus:outline-none focus:ring-0">
+            <button class="flex items-center p-4" (click)="cfPasswordClick($event)">
+              <mat-icon>{{ cfPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+          </div>
+          <ng-container
+            *ngIf="form.get('password_confirmation')?.touched && form.get('password_confirmation')?.errors as errors">
+            <mat-error *ngIf="errors['required']" class="text-red-500 pl-4">Required Confirm Password</mat-error>
+            <mat-error *ngIf="errors['maxlength']">{{ errors['maxlength']['actualLength'] }}
+              /{{ errors['maxlength']['requiredLength'] }}
+            </mat-error>
+          </ng-container>
+        </div>
+
+
+        <div class="w-full flex flex-col items-center max-sm:flex max-sm:flex-col space-y-4 max-sm:space-y-4">
+         <mat-checkbox>I accept the Terms of Use & Privacy policy</mat-checkbox>
+          <button class="p-2 w-full rounded-full bg-[#219891] hover:bg-[#1F8A84] text-white font-bold max-sm:w-full" (click)="onSignUp()">
+            Sign Up
+          </button>
         </div>
 
         <div class="flex items-center gap-2">
-          <mat-icon>subdirectory_arrow_right</mat-icon>
-          <button class="text-[#219891] font-medium" (click)="onChange()">Go to Log in</button>
+          <span>Already have an account?</span>
+          <button class="text-[#219891] font-medium" (click)="onChange()"> Log in</button>
         </div>
 
-      </div>
+      </form>
     </div>
 
   </div>

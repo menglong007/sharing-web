@@ -1,7 +1,7 @@
-<div class="h-full overflow-y-hidden bg-neutral-100 dark:bg-neutral-700">
-  <div class="flex gap-8 justify-between">
-    <div class="h-screen ">
-      <img src="assets/signin.png" class="w-full h-full rounded-br-full rounded-tr-[5000px]">
+<div class="h-full  bg-neutral-100 dark:bg-neutral-700">
+  <div class="flex justify-between">
+    <div class="h-auto max-xl:hidden" >
+      <img src="assets/signin.png" class="w-full h-full">
     </div>
     <div>
       <div class="flex w-full justify-end p-2">
@@ -10,25 +10,45 @@
         </button>
       </div>
 
-      <div class="flex flex-col space-y-4 justify-center items-center p-20 h-fit">
+      <form class="flex flex-col space-y-4 justify-center items-center p-20 h-fit max-sm:p-10" [formGroup]="form">
         <p class="font-semibold text-3xl text-center">Login</p>
 
-        <input placeholder="Username" class="bg-neutral-200 p-4 rounded-full w-96 focus:outline-none focus:ring-0">
-
-        <input type="password" placeholder="Password"
-               class="bg-neutral-200 p-4 rounded-full w-96 focus:outline-none focus:ring-0">
-
-        <button class="p-4 rounded-full bg-[#219891] hover:bg-[#1F8A84] font-bold text-white w-40">LOGIN</button>
-        <div class="space-y-4">
-          <span> <button class="text-[#219891]"
-                         (click)="onChange()">Sign Up</button> or Sign in with social platform</span>
-          <div class="flex gap-4 justify-center">
-            <img src="assets/svg/facebook.svg" class="w-12">
-            <img src="assets/svg/gmail.svg" class="w-12">
-            <img src="assets/svg/twitter.svg" class="w-12">
-          </div>
+        <div class="w-full">
+          <input placeholder="Username" formControlName="email_or_username" required
+                 class="bg-neutral-200 p-4 rounded-full w-96 focus:outline-none focus:ring-0 max-sm:w-full">
+          <ng-container *ngIf="form.get('email_or_username')?.touched && form.get('email_or_username')?.errors as errors">
+            <mat-error *ngIf="errors['required']" class="text-red-500 pl-4">Required Username</mat-error>
+            <mat-error *ngIf="errors['maxlength']">{{ errors['maxlength']['actualLength'] }}
+              /{{ errors['maxlength']['requiredLength'] }}
+            </mat-error>
+          </ng-container>
         </div>
-      </div>
+
+        <div class="w-full">
+          <input type="password" placeholder="Password" formControlName="password"
+                 class="bg-neutral-200 p-4 rounded-full w-96 focus:outline-none focus:ring-0  max-sm:w-full">
+          <ng-container *ngIf="form.get('password')?.touched && form.get('password')?.errors as errors">
+            <mat-error *ngIf="errors['required']" class="text-red-500 pl-4">Required Password</mat-error>
+            <mat-error *ngIf="errors['maxlength']">{{ errors['maxlength']['actualLength'] }}
+              /{{ errors['maxlength']['requiredLength'] }}
+            </mat-error>
+          </ng-container>
+        </div>
+
+
+        <button (click)="onSignIn()" class="p-4 rounded-full bg-[#219891] hover:bg-[#1F8A84] font-bold text-white w-40">
+          LOGIN
+        </button>
+        <div class="space-y-4">
+          <span>Don’t have an account yet?<button class="text-[#219891]"
+                         (click)="onChange()">Sign Up</button></span>
+<!--          <div class="flex gap-4 justify-center">-->
+<!--            <img src="assets/svg/facebook.svg" class="w-12">-->
+<!--            <img src="assets/svg/gmail.svg" class="w-12">-->
+<!--            <img src="assets/svg/twitter.svg" class="w-12">-->
+<!--          </div>-->
+        </div>
+      </form>
     </div>
 
   </div>

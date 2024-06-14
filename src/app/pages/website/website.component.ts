@@ -21,31 +21,21 @@ import {
   MatExpansionPanelDescription,
   MatExpansionPanelTitle
 } from "@angular/material/expansion";
-import {RouterLink} from "@angular/router";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {NgxLoadingModule} from "ngx-loading";
 import {NgIf} from "@angular/common";
 import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {NavMenuComponent} from "../shared/navigate-bar/nav-menu/nav-menu.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {SearchContentComponent} from "./search-content/search-content.component";
+import {DetailsComponent} from "./details/details.component";
 
 export interface PeriodicElement {
-  link: string;
-  logo: string;
+  name: string;
+  avatar: string;
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {link: 'Hydrogen', logo: 'H'},
-  {link: 'Helium', logo: 'He'},
-  {link: 'Lithium', logo: 'Li'},
-  {link: 'Beryllium', logo: 'Be'},
-  {link: 'Boron', logo: 'B'},
-  {link: 'Carbon', logo: 'C'},
-  {link: 'Nitrogen', logo: 'N'},
-  {link: 'music', logo: 'O'},
-  {link: 'Cryptography', logo: 'F'},
-  {link: 'Neon', logo: 'Ne'},
-];
 
 
 @Component({
@@ -78,20 +68,24 @@ const ELEMENT_DATA: PeriodicElement[] = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NavMenuComponent
+    NavMenuComponent,
+    SearchContentComponent,
+    DetailsComponent
   ],
   templateUrl: './website.component.html',
+  providers: [DetailsComponent]
 })
-export class WebsiteComponent implements OnInit {
+export class WebsiteComponent implements OnInit, AfterViewInit {
 
   input = new FormControl<string | null>(null);
-
+  message: any;
+  onDetailSearch : any;
+  onNavMenu:any;
 
   public loading = false;
 
-  displayedColumns: string[] = ['no', 'link', 'logo'];
+  displayedColumns: string[] = ['no', 'name', 'avatar'];
   dataSource = new MatTableDataSource([]);
-
 
   checked: boolean = false;
 
@@ -103,11 +97,37 @@ export class WebsiteComponent implements OnInit {
     this.checked = false;
   }
 
-  constructor(private http: HttpClient) {
-    // this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
-    //   return data.link.toLowerCase().includes(filter);
-    // };
+  constructor(private http: HttpClient,
+              private snackBar: MatSnackBar,
+              private ac: ActivatedRoute,
+  ){
+    this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
+      return data.name.toLowerCase().includes(filter);
+    };
+  }
 
+
+  ngOnInit() {
+    this.loading = true;
+    this.http.get(`http://127.0.0.1:8000/api/record/links`).subscribe({
+      next: (data: any) => {
+        this.dataSource.data = data.message.data;
+        this.loading = false;
+      },
+      error: () => {
+        this.loading = false;
+        this.snackBar.open("Error", 'close');
+      }
+    });
+  }
+
+  applyFilter(filterValue: string) {
+    const filter = filterValue.trim().toLowerCase();
+    this.dataSource.filterPredicate = (data:any, filter) => {
+      return data.links_category.name.toLowerCase().includes(filter);
+    };
+    this.dataSource.filter = filter;
+    console.log(this.dataSource.filter);
   }
 
   onSubmit() {
@@ -125,18 +145,29 @@ export class WebsiteComponent implements OnInit {
     }
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
 
-  ngOnInit() {
-    this.loading = true;
-    this.http.get(`http://127.0.0.1:8000/api/record/links`).subscribe({
-      next: (data: any) => {
-        this.dataSource.data = data.message.data;
-        this.loading = false;
-      }
-    })
+  ngAfterViewInit() {
+    this.message = this.ac.snapshot.queryParams['msg'];
+    if (this.message){
+      const filter = this.message.trim().toLowerCase();
+      this.dataSource.filterPredicate = (data:any, filter) => {
+        return data.links_category.name.toLowerCase().includes(filter);
+      };
+      this.dataSource.filter = filter;
+    }
+    this.onDetailSearch = this.ac.snapshot.queryParams['search'];
+    if (this.onDetailSearch) {
+      this.dataSource.filter = this.onDetailSearch.trim().toLowerCase();
+    }
+
+    this.onNavMenu = this.ac.snapshot.queryParams['nav_menu'];
+    if (this.onNavMenu) {
+      const filter = this.onNavMenu.trim().toLowerCase();
+      this.dataSource.filterPredicate = (data:any, filter) => {
+        return data.links_category.name.toLowerCase().includes(filter);
+      };
+      this.dataSource.filter = filter;
+    }
   }
 
 

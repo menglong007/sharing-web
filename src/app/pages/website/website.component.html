@@ -1,12 +1,12 @@
 <div class="h-screen w-full flex flex-col space-y-7 dark:bg-neutral-800">
   <div class="flex mt-16 w-full">
     <img src="assets/product.png" class="object-cover w-full h-40">
-    <div class="p-4 w-[500px] h-40 flex flex-col items-center justify-center bg-white">
-      <p class="text-3xl font-bold ">Top Websites ranking</p>
-      <span class="flex items-center justify-center font-medium text-gray-500 gap-2 text-lg">Most Visited Websites <mat-icon>computer</mat-icon> </span>
+    <div class="p-4 w-[500px] h-40 flex flex-col items-center justify-center bg-white max-sm:p-2">
+      <p class="text-3xl font-bold max-sm:text-xl max-sm:text-center">Top Websites ranking</p>
+      <span class="flex items-center justify-center font-medium text-gray-500 gap-2 text-lg max-sm:text-xs max-sm:text-center max-sm:gap-1">Most Visited Websites <mat-icon>computer</mat-icon> </span>
     </div>
   </div>
-  <div class="flex flex-col space-y-7 pl-60 pr-60">
+  <div class="flex flex-col space-y-7 pl-60 pr-60 max-sm:p-4 md:pl-20 md:pr-20 lg:pl-52 lg:pr-52">
     <div class="flex space-x-10">
       <div class="bg-neutral-200 p-2 rounded-full w-96 flex items-center gap-4 dark:bg-neutral-700 dark:text-white">
         <mat-icon>drag_indicator</mat-icon>
@@ -18,20 +18,10 @@
         </button>
         <mat-menu #beforeMenu="matMenu" xPosition="before" class="w-96 menu">
           <div class="p-8">
-            <ul class="space-y-2 ">
-              <li><button (click)="applyFilter('Cryptography')">Cryptography</button></li>
-              <li><button (click)="applyFilter('Business')">Business</button></li>
-              <li><button (click)="applyFilter('Science')">Science</button></li>
-              <li><button (click)="applyFilter('Code')">Code</button></li>
-              <li><button (click)="applyFilter('Math')">Math</button></li>
-              <li><button (click)="applyFilter('History')">History</button></li>
-              <li><button (click)="applyFilter('Music')">Music</button></li>
-              <li><button (click)="applyFilter('Downloader')">Downloader</button></li>
-            </ul>
+           <app-user-search (submitted)="applyFilter($event)"></app-user-search>
           </div>
         </mat-menu>
       </div>
-
       <button class="p-2 rounded-full bg-[#219891] hover:bg-[#1F8A84] text-black font-bold  w-16" (click)="onSubmit()">Go</button>
 
     </div>
@@ -39,29 +29,32 @@
 
     <div>
       <table mat-table [dataSource]="dataSource" class="dark:bg-neutral-700">
+         <ng-container matColumnDef="no">
+           <th mat-header-cell *matHeaderCellDef class="w-40 max-sm:w-auto dark:text-white"> Ranking</th>
+           <td mat-cell *matCellDef=" let index =index" class="font-bold dark:text-white cursor-pointer"
+           >{{ index + 1 }}
+           </td>
+         </ng-container>
 
-        <ng-container matColumnDef="no">
-          <th mat-header-cell *matHeaderCellDef class="w-40 dark:text-white"> Ranking</th>
-          <td mat-cell *matCellDef="let element =index" class="font-bold dark:text-white "
-              [routerLink]="'details/'">{{ element + 1 }}
-          </td>
-        </ng-container>
+         <ng-container matColumnDef="name">
+           <th mat-header-cell *matHeaderCellDef class="dark:text-white"> Link</th>
+           <td mat-cell *matCellDef="let element" class="dark:text-white cursor-pointer"
+           >{{ element.name }}
+           </td>
+         </ng-container>
 
-        <ng-container matColumnDef="link">
-          <th mat-header-cell *matHeaderCellDef class="dark:text-white"> Link</th>
-          <td mat-cell *matCellDef="let element" class="dark:text-white" [routerLink]="'details/'">{{ element.link }}
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="logo">
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let element" class="text dark:text-white"
-              [routerLink]="'details/'">{{ element.logo }}
-          </td>
-        </ng-container>
+         <ng-container matColumnDef="avatar">
+           <th mat-header-cell *matHeaderCellDef class=" text-center"></th>
+           <td mat-cell *matCellDef="let element" class="text text-center dark:text-white cursor-pointer h-32">
+             <div class="flex flex-col justify-center items-center">
+               <img [src]="element.avatar" class="w-12 h-12 rounded-full" alt="avatar">
+               <u class="text-blue-600 mt-2">see more detail</u>
+             </div>
+           </td>
+         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header "></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr [routerLink]="'details/' + row.id" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
     </div>
   </div>
@@ -70,6 +63,7 @@
 <ngx-loading
   [show]="loading"
   [config]="{ backdropBorderRadius: '3px'}"></ngx-loading>
+
 
 
 

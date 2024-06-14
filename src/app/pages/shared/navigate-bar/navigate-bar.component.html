@@ -1,5 +1,5 @@
 <div class="h-16 w-full bg-white dark:bg-neutral-800 border-b border-gray-300 p-4 flex items-center justify-between">
-  <div class="flex space-x-20 text-sm">
+  <div class="flex space-x-20 text-sm max-sm:hidden max-md:hidden max-lg:hidden max-xl:hidden">
     <div class="p-4 inline-block px-5 py-5">
       <img src="assets/logo.png" class="w-12 border border-black rounded-2xl cursor-pointer "
            [routerLink]="'/home'"
@@ -14,13 +14,13 @@
         </a>
         <mat-icon>{{ checked ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
       </button>
-      <mat-menu class="navMenu" #menu="matMenu" >
+      <mat-menu class="navMenu" #menu="matMenu">
         <div class="flex w-full justify-end pr-4">
           <button mat-dialog-close (click)="menuTrigger()">
             <mat-icon>close</mat-icon>
           </button>
         </div>
-        <app-nav-menu></app-nav-menu>
+        <app-nav-menu (navMenuClose)="menuTrigger()"></app-nav-menu>
       </mat-menu>
 
       <ng-container *ngFor="let menu of Menu">
@@ -35,22 +35,63 @@
     </div>
   </div>
 
+  <div class="flex items-center xl:hidden  ">
+    <button mat-button [matMenuTriggerFor]="belowMenu">
+      <mat-icon class="dark:text-white">menu</mat-icon>
+    </button>
+    <mat-menu #belowMenu="matMenu" yPosition="below" class="menu" >
+      <div class="flex flex-col space-y-4">
+        <button
+          [routerLink]="'/home'"
+          routerLinkActive="text-[#219891] "
+          [routerLinkActiveOptions]="{ exact: true }">
+          Home
+        </button>
+        <button mat-menu-item (click)="$event.stopPropagation()" [matMenuTriggerFor]="invertebrates">
+          Categories
+        </button>
+        <mat-menu #invertebrates="matMenu" class="menu">
+          <app-nav-menu-res (navMenuClose)="menuTrigger()"></app-nav-menu-res>
+        </mat-menu>
+        <ng-container *ngFor="let menu of Menu">
+          <button
+            routerLinkActive="text-[#219891]"
+            [routerLinkActiveOptions]="{ exact: true }"
+            [routerLink]="menu.route"
+          >{{ menu.label }}</button>
+        </ng-container>
+
+      </div>
+
+    </mat-menu>
+    <div class="">
+      <img src="assets/logo.png" class="max-sm:w-8 md:w-9 border border-black rounded-lg ">
+    </div>
+  </div>
+
   <div class=" flex items-center gap-8 dark:text-white">
-    <span class="flex items-center font-bold">
-      <mat-icon>language</mat-icon>
-      EN
-    </span>
     <button>
-      <mat-icon (click)="toggleTheme()">{{themeService.isDark? 'dark_mode':'light_mode' }}</mat-icon>
+      <mat-icon (click)="toggleTheme()">{{ themeService.isDark ? 'dark_mode' : 'light_mode' }}</mat-icon>
     </button>
 
-    <div class="flex gap-4">
-      <button class="border rounded-lg border-black dark:border-white pl-4 pr-4 text-sm font-bold p-1" (click)="onSignIn()">log in
+    <div class="flex gap-4" *ngIf="!authService.token">
+      <button class="border rounded-lg border-black dark:border-white pl-4 pr-4 text-sm font-bold p-1"
+              (click)="onSignIn()">log in
       </button>
-      <button class=" bg-black text-white dark:bg-neutral-700 rounded-lg  pl-4 pr-4 text-sm font-bold p-1"
+      <button class="max-sm:hidden bg-black text-white dark:bg-neutral-700 rounded-lg  pl-4 pr-4 text-sm font-bold p-1"
               (click)="onSignUp()">sign up
       </button>
     </div>
 
+    <div class="flex gap-4" *ngIf="authService.token">
+      <div >
+        <button class="bg-purple-900 text-white rounded-lg pl-4 pr-4 text-sm font-bold p-1">Dashboard
+        </button>
+      </div>
+      <div >
+        <button class="bg-black text-white rounded-lg pl-4 pr-4 text-sm font-bold p-1" (click)="onSignOut()">sign out
+        </button>
+      </div>
+    </div>
   </div>
 </div>

@@ -4,14 +4,14 @@ import {Router} from "@angular/router";
 import {MatMenuTrigger} from "@angular/material/menu";
 
 @Component({
-  selector: 'app-nav-menu',
+  selector: 'app-nav-menu-res',
   standalone: true,
   imports: [
     MatIcon
   ],
-  templateUrl: './nav-menu.component.html',
+  templateUrl: './nav-menu-res.component.html',
 })
-export class NavMenuComponent {
+export class NavMenuResComponent {
 
   @Output() navMenuClose: EventEmitter<any> = new EventEmitter();
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;

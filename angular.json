@@ -3,6 +3,11 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "schematics": {
+      "root": "",
+      "projectType": "application",
+      "architect": {}
+    },
     "sharing-web": {
       "projectType": "application",
       "schematics": {},
@@ -30,6 +35,7 @@
             ],
             "scripts": []
           },
+
           "configurations": {
             "production": {
               "budgets": [

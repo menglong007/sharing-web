@@ -1,5 +1,5 @@
 <div>
-  <footer class="flex justify-between dark:bg-neutral-700 dark:text-white  pl-40 pr-40 p-10">
+  <footer class="flex justify-between dark:bg-neutral-700 dark:text-white  xl:pl-40 xl:pr-40 p-10 max-sm:flex max-sm:flex-col max-sm:space-y-4 ">
     <!-- Left Column -->
     <div class="flex justify-between flex-col">
       <div class="flex flex-col items-center">
@@ -15,7 +15,8 @@
         <span class="font-semibold">Follow</span>
         <div class="flex space-x-4">
           <a href="#"><img src="assets/svg/facebook.svg" alt="Facebook" class="w-6 h-6"></a>
-          <a href="#"><img src="assets/svg/gmail.svg" alt="Twitter" class="w-6 h-6"></a>
+          <a href="#"><img src="assets/svg/gmail.svg" alt="Gmail" class="w-6 h-6"></a>
+          <a href="#"><img src="assets/svg/telegram.svg" alt="Telegram" class="w-6 h-6"></a>
         </div>
       </div>
 
@@ -25,14 +26,14 @@
     <div>
       <p class="font-bold  mb-4">Categories</p>
       <ul class="space-y-2">
-        <li>Science</li>
-        <li>Program</li>
-        <li>Bossiness</li>
-        <li>Math</li>
-        <li>History</li>
-        <li>Media</li>
-        <li>Cryptocurrency</li>
-        <li>Tool Download</li>
+        <li class="cursor-pointer" (click)="applyFilter('Science')">Science</li>
+        <li class="cursor-pointer" (click)="applyFilter('Programming')">Program</li>
+        <li class="cursor-pointer" (click)="applyFilter('Business')">Bossiness</li>
+        <li class="cursor-pointer" (click)="applyFilter('Math')">Math</li>
+        <li class="cursor-pointer" (click)="applyFilter('History')">History</li>
+        <li class="cursor-pointer" (click)="applyFilter('Social Media')">Media</li>
+        <li class="cursor-pointer" (click)="applyFilter('Cryptocurrency')">Cryptocurrency</li>
+        <li class="cursor-pointer" (click)="applyFilter('Downloader')">Tool Download</li>
       </ul>
     </div>
 
@@ -40,9 +41,9 @@
     <div>
       <p class="font-bold  mb-4">Help</p>
       <ul class="space-y-2">
-        <li>Help Service</li>
-        <li>Contact us</li>
-        <li>Support</li>
+        <li (click)="goToHelp()" class="cursor-pointer">Help Service</li>
+        <li (click)="goToContact()" class="cursor-pointer">Contact us</li>
+        <li><a href="#">Support</a></li>
         <li>Security</li>
       </ul>
     </div>
