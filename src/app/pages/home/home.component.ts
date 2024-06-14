@@ -6,8 +6,8 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatError} from "@angular/material/form-field";
-import {NgIf} from "@angular/common";
-import {NgbCarouselModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgFor, NgIf} from "@angular/common";
+import {NgbCarouselConfig, NgbCarouselModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +22,7 @@ import {NgbCarouselModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
         NgIf,
       NgbModule,
       NgbCarouselModule,
+      NgFor
     ],
   templateUrl: './home.component.html',
 
