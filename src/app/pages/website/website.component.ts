@@ -75,7 +75,7 @@ export interface PeriodicElement {
   templateUrl: './website.component.html',
   providers: [DetailsComponent]
 })
-export class WebsiteComponent implements OnInit, AfterViewInit {
+export class WebsiteComponent implements AfterViewInit {
 
   input = new FormControl<string | null>(null);
   message: any;
@@ -106,8 +106,35 @@ export class WebsiteComponent implements OnInit, AfterViewInit {
     };
   }
 
+  ngAfterViewInit() {
+    this.loadData();
 
-  ngOnInit() {
+    this.message = this.ac.snapshot.queryParams['msg'];
+    if (this.message){
+      const filter = this.message.trim().toLowerCase();
+      this.dataSource.filterPredicate = (data:any, filter) => {
+        return data.links_category.name.toLowerCase().includes(filter);
+      };
+      this.dataSource.filter = filter;
+    }
+
+    this.onDetailSearch = this.ac.snapshot.queryParams['search'];
+    if (this.onDetailSearch) {
+      this.dataSource.filter = this.onDetailSearch.trim().toLowerCase();
+    }
+
+    this.onNavMenu = this.ac.snapshot.queryParams['nav_menu'];
+    if (this.onNavMenu) {
+      const filter = this.onNavMenu.trim().toLowerCase();
+      this.dataSource.filterPredicate = (data:any, filter) => {
+        return data.links_category.name.toLowerCase().includes(filter);
+      };
+      this.dataSource.filter = filter;
+    }
+  }
+
+
+  loadData() {
     this.loading = true;
     this.http.get(`http://127.0.0.1:8000/api/record/links`).subscribe({
       next: (data: any) => {
@@ -146,29 +173,7 @@ export class WebsiteComponent implements OnInit, AfterViewInit {
   }
 
 
-  ngAfterViewInit() {
-    this.message = this.ac.snapshot.queryParams['msg'];
-    if (this.message){
-      const filter = this.message.trim().toLowerCase();
-      this.dataSource.filterPredicate = (data:any, filter) => {
-        return data.links_category.name.toLowerCase().includes(filter);
-      };
-      this.dataSource.filter = filter;
-    }
-    this.onDetailSearch = this.ac.snapshot.queryParams['search'];
-    if (this.onDetailSearch) {
-      this.dataSource.filter = this.onDetailSearch.trim().toLowerCase();
-    }
 
-    this.onNavMenu = this.ac.snapshot.queryParams['nav_menu'];
-    if (this.onNavMenu) {
-      const filter = this.onNavMenu.trim().toLowerCase();
-      this.dataSource.filterPredicate = (data:any, filter) => {
-        return data.links_category.name.toLowerCase().includes(filter);
-      };
-      this.dataSource.filter = filter;
-    }
-  }
 
 
 }
