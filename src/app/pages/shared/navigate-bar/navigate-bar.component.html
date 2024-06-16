@@ -39,7 +39,7 @@
     <button mat-button [matMenuTriggerFor]="belowMenu">
       <mat-icon class="dark:text-white">menu</mat-icon>
     </button>
-    <mat-menu #belowMenu="matMenu" yPosition="below" class="menu" >
+    <mat-menu #belowMenu="matMenu" yPosition="below" class="menu">
       <div class="flex flex-col space-y-4">
         <button
           [routerLink]="'/home'"
@@ -58,7 +58,8 @@
             routerLinkActive="text-[#219891]"
             [routerLinkActiveOptions]="{ exact: true }"
             [routerLink]="menu.route"
-          >{{ menu.label }}</button>
+          >{{ menu.label }}
+          </button>
         </ng-container>
 
       </div>
@@ -83,12 +84,14 @@
       </button>
     </div>
 
-    <div class="flex gap-4" *ngIf="authService.token">
-      <div >
-        <button class="bg-purple-900 text-white rounded-lg pl-4 pr-4 text-sm font-bold p-1">Dashboard
-        </button>
+    <div class="flex gap-4 items-center" *ngIf="authService.token">
+      <div>
+        <a target="_blank"
+          class="bg-purple-900 text-white rounded-lg pl-4 pr-4 text-sm font-bold p-1" href=" http://localhost:4001/" >
+          Dashboard
+        </a>
       </div>
-      <div >
+      <div>
         <button class="bg-black text-white rounded-lg pl-4 pr-4 text-sm font-bold p-1" (click)="onSignOut()">sign out
         </button>
       </div>

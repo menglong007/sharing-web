@@ -1,3 +1,28 @@
-<div>
-  
+<div class="carousel">
+  <div class="flex dark:bg-neutral-700 bg-gray-200 rounded-2xl w-full items-center  p-8 h-96 pr-32 pl-32 md:p-5 md:space-x-10 max-sm:p-4 max-sm:space-x-4">
+    <div  *ngFor="let item of array; let i = index" [hidden]="i < currentIndex || i >= currentIndex + 2">
+      <div >
+        <div class="flex justify-center w-full h-full" *ngIf="array">
+          <div class="w-full bg-neutral-300 rounded-2xl flex md:p-8 max-sm:p-2 max-sm:space-x-2  h-full ">
+            <div class="w-full">
+              <img [src]="item.avatar" class="w-20 h-20 max-sm:w-10 max-sm:h-10 rounded-full">
+            </div>
+            <div class="w-auto">
+              <p class="text-lg font-bold">{{item.name}}</p>
+              <p>  {{item.link_info[0].description_link}}</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex gap-2 w-full h-full justify-center mt-2 ">
+    <button mat-raised-button (click)="prevItem()">
+      <mat-icon>skip_previous</mat-icon>
+    </button>
+    <button mat-raised-button (click)="nextItem()">
+      <mat-icon>skip_next</mat-icon>
+    </button>
+  </div>
 </div>

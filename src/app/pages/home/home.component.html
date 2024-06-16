@@ -9,13 +9,12 @@
         <img src="assets/home-img/photo_home3.png" class="w-32 max-sm:w-20 md:w-24">
       </div>
 
-      <div class="flex flex-col space-y-4 justify-center items-center w-[50%] md:w-full dark:text-white max-sm:w-full max-sm:p-4 ">
+      <div
+        class="flex flex-col space-y-4 justify-center items-center xl:w-[50%] md:w-full dark:text-white max-sm:w-full max-sm:p-4 ">
         <p class="text-4xl font-extrabold max-sm:text-center">Most trending Website</p>
-        <p class="text-lg max-sm:text-center"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-          been the industry's
-          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-          make
-          a type specimen book.</p>
+        <p class="text-lg max-sm:text-center">All websites have carved out a niche in the digital landscape, catering to
+          specific needs from information search and social interaction to entertainment and professional networking,
+          shaping the way we connect and consume content online.</p>
         <div>
           <button class="bg-[#219891] rounded-xl p-4 font-bold pl-8 pr-8" [routerLink]="'/website'">Try for free
           </button>
@@ -52,7 +51,8 @@
       </div>
 
       <div>
-        <p class="text-black font-bold text-3xl dark:text-white max-sm:p-4 max-sm:text-xl ">Sharing, Chatting , Popular,and Safety</p>
+        <p class="text-black font-bold text-3xl dark:text-white max-sm:p-4 max-sm:text-xl ">Sharing, Chatting ,
+          Popular,and Safety</p>
       </div>
 
     </div>
@@ -72,15 +72,9 @@
 
           <div class="w-full ">
             <p class="text-3xl font-extrabold text-center">Topic</p>
-            <p class="text-lg"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-              has been the industry's
-              standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
-              to make
-              a type specimen book.</p>
-            <div class="flex text-lg items-center gap-3">
-              <u>See more</u>
-              <mat-icon>arrow_forward</mat-icon>
-            </div>
+            <p class="text-lg"> Topic
+              Sharing websites allow users to share and discover information on various subjects, fostering communities
+              based on common interests.</p>
           </div>
 
         </div>
@@ -91,15 +85,11 @@
 
           <div class="w-full ">
             <p class="text-3xl font-extrabold text-center">Links</p>
-            <p class="text-lg"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-              has been the industry's
-              standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
-              to make
-              a type specimen book.</p>
-            <div class="flex text-lg items-center gap-3">
-              <u>See more</u>
-              <mat-icon>arrow_forward</mat-icon>
-            </div>
+            <p class="text-lg"> The site provides an array of hyperlinks to different resources, ranging from
+              educational materials to entertainment options, making it a valuable tool for users seeking quick access
+              to information or entertainment. Whether you're looking for news updates, educational content, or leisure
+              activities, Links aims to streamline your browsing experience with its organized and comprehensive
+              collection of links.</p>
 
           </div>
           <div class="w-full flex justify-end">
@@ -118,15 +108,11 @@
 
           <div class="w-full ">
             <p class="text-3xl font-extrabold text-center">Idea</p>
-            <p class="text-lg"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-              has been the industry's
-              standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
-              to make
-              a type specimen book.</p>
-            <div class="flex text-lg items-center gap-3">
-              <u>See more</u>
-              <mat-icon>arrow_forward</mat-icon>
-            </div>
+            <p class="text-lg"> Creating a niche sharing website can tap into specific interests or needs, such as a
+              platform for sharing educational resources among teachers. Implementing robust privacy and security
+              measures can build user trust and encourage more active participation. Integrating social features like
+              commenting, rating, and sharing can enhance user interaction. Offering premium features or a subscription
+              model can help monetize the platform.</p>
           </div>
 
         </div>
@@ -137,16 +123,11 @@
 
           <div class="w-full ">
             <p class="text-3xl font-extrabold text-center">Read feedback</p>
-            <p class="text-lg"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-              has been the industry's
-              standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
-              to make
-              a type specimen book.</p>
-            <div class="flex text-lg items-center gap-3">
-              <u>See more</u>
-              <mat-icon>arrow_forward</mat-icon>
-            </div>
-
+            <p class="text-lg"> User feedback is crucial for the success of a sharing website. Regularly reviewing
+              comments, ratings, and suggestions can provide insights into user satisfaction and areas for improvement.
+              Implementing feedback mechanisms like surveys or feedback forms can make users feel valued and heard.
+              Analyzing patterns in feedback can help prioritize feature updates or bug fixes. Addressing negative
+              feedback promptly and transparently can enhance user trust and loyalty.</p>
           </div>
           <div class="w-full flex justify-end">
             <img
@@ -162,24 +143,20 @@
       <p class="text-black font-bold text-5xl  dark:text-white max-sm:text-4xl">Popular links Website</p>
     </div>
 
-
-    <div class="w-full h-auto flex justify-center">
-      <div class="w-[75%] ">
-        <ngb-carousel [showNavigationArrows]="showArrows" [showNavigationIndicators]="showIndicators">
-          <ng-template ngbSlide *ngFor="let slide of slides" >
-            <img [src]="slide.imageUrl"  alt="photo" class="w-full ">
-          </ng-template>
-        </ngb-carousel>
-
+    <div class="w-full  flex justify-center">
+      <div class=" md:w-[75%] max-sm:w-[85%]">
+        <popular-link></popular-link>
       </div>
     </div>
 
 
     <!--    contact us-->
     <div class="w-full flex justify-center mt-20 items-center">
-      <div class="flex justify-between w-[75%] items-center max-sm:flex max-sm:flex-col md:flex md:flex-col md:text-center ">
+      <div class="flex justify-between w-[75%] items-center max-sm:flex max-sm:flex-col md:flex md:flex-col ">
         <div class="w-full">
-          <p class="text-black font-extralight text-6xl dark:text-white max-sm:text-4xl max-sm:text-center">Contact Us</p>
+          <p
+            class="text-black font-extralight text-6xl dark:text-white max-sm:text-4xl max-sm:text-center md:text-center">
+            Contact Us</p>
         </div>
 
         <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md bg-gray-100 dark:bg-neutral-700 p-10 rounded-2xl w-full">
@@ -187,7 +164,8 @@
 
             <div class=" flex space-x-4 w-full">
               <div class="w-full">
-                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">First Name</label>
+                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">First
+                  Name</label>
                 <input type="text" id="first_name" formControlName="first_name"
                        class="w-full focus:outline-none focus:ring-0 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block p-2.5 dark:bg-neutral-600 dark:border-neutral-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-neutral-600 dark:focus:border-neutral-600neutral-600 dark:shadow-sm-light"
                        placeholder="first name" required>
@@ -201,7 +179,8 @@
               </div>
 
               <div class="w-full">
-                <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Last Name</label>
+                <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Last
+                  Name</label>
                 <input type="text" id="last_name" formControlName="last_name"
                        class="w-full focus:outline-none focus:ring-0 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block p-2.5 dark:bg-neutral-600 dark:border-neutral-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-neutral-600 dark:focus:border-neutral-600neutral-600 dark:shadow-sm-light"
                        placeholder="last name" required>
@@ -254,12 +233,6 @@
     </div>
     <div class="mt-16">
       <app-footer (filterValueChange)="applyFilter($event)"></app-footer>
-
     </div>
-
-
   </div>
-
-
 </div>
-
