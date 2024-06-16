@@ -130,6 +130,7 @@ export class WebsiteComponent implements AfterViewInit {
         return data.links_category.name.toLowerCase().includes(filter);
       };
       this.dataSource.filter = filter;
+      this.loadData();
     }
   }
 
